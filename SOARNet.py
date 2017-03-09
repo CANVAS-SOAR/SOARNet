@@ -40,4 +40,27 @@ def network(x, weights, biases, dropout):
 	c5_3 = convolution(c5_2, weight_variable([3, 3, 128, 64]), bias_variable([512]), 1)
 	p5 = maxpool(c5_3, 2)
 
+	u1 = upsample(p5, 2)
+	c6_1 = convolution(u1, weight_variable([3, 3, 128, 64]), bias_variable([512]), 1)
+	c6_2 = convolution(c6_1, weight_variable([3, 3, 128, 64]), bias_variable([512]), 1)
+	c6_3 = convolution(c6_2, weight_variable([3, 3, 128, 64]), bias_variable([512]), 1)
+
+	u2 = upsample(c6_3, 2)
+	c7_1 = convolution(u2, weight_variable([3, 3, 256, 128]), bias_variable([512]), 1)
+	c7_2 = convolution(c7_1, weight_variable([3, 3, 256, 128]), bias_variable([512]), 1)
+	c7_3 = convolution(c7_2, weight_variable([3, 3, 256, 128]), bias_variable([512]), 1)
+
+	u3 = upsample(c7_3, 2)
+	c8_1 = convolution(u3, weight_variable([3, 3, 512, 256]), bias_variable([256]), 1)
+	c8_2 = convolution(c8_1, weight_variable([3, 3, 512, 256]), bias_variable([256]), 1)
+	c8_3 = convolution(c8_2, weight_variable([3, 3, 512, 256]), bias_variable([256]), 1)
+
+	u4 = upsample(c8_3, 2)
+	c9_1 = convolution(u4, weight_variable([3, 3, 1024, 512]), bias_variable([128]), 1)
+	c9_2 = convolution(c9_1, weight_variable([3, 3, 1024, 512]), bias_variable([64]), 1)
+
+	u5 = upsample(c9_2, 2)
+	c10_1 = convolution(u5, weight_variable([3, 3, 2048, 1024]), bias_variable([64]), 1)
+	c10_2 = convolution(c10_1, weight_variable([3, 3, 2048, 1024]), bias_variable([3]), 1)
+
 	s1 = tf.nn.softmax(p5)
