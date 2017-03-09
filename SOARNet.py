@@ -39,3 +39,5 @@ def network(x, weights, biases, dropout):
 	c5_2 = convolution(c5_1, weight_variable([3, 3, 128, 64]), bias_variable([512]), 1)
 	c5_3 = convolution(c5_2, weight_variable([3, 3, 128, 64]), bias_variable([512]), 1)
 	p5 = maxpool(c5_3, 2)
+
+	s1 = tf.nn.softmax(p5)
