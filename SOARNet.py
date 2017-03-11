@@ -16,6 +16,10 @@ def convolution(x, W, b, s):
 def maxpool(x, k):
 	return tf.nn.max_pool(x, ksize=[1,k,k,1], strides=[1,k,k,1], padding='SAME')
 
+def upsample(x, k):
+	# do something...
+	return
+
 def network(x, weights, biases, dropout):
 	c1_1 = convolution(x, weight_variable([3, 3, 2048, 1024]), bias_variable([64]), 1)
 	c1_2 = convolution(c1_1, weight_variable([3, 3, 2048, 1024]), bias_variable([64]), 1)
